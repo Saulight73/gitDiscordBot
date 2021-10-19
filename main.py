@@ -1,4 +1,19 @@
-import discord
+import os
 
-client = discord.Client()
-client.run("ODkwOTU3OTEzNjMwMzEwNDAy.YU3XNw.Yp4S1tYAy63hxI13lF4It7eYxBE")
+import discord
+from dotenv import load_dotenv
+from discord.ext import commands
+
+load_dotenv(dotenv_path="config")
+
+client = commands.Bot(command_prefix='*')
+
+@client.command(name='join',pass_context = True)
+async def join(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+
+
+client.run(os.getenv("TOKEN"))
+
+
